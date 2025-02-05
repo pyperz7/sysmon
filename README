@@ -1,7 +1,11 @@
 Instructions
 
 chmod +x install.sh
-
 ./install.sh
 
 https://yourip:8443
+
+To remove:
+
+chmod +x uninstall.sh
+./uninstall.sh

@@ -1,0 +1,7 @@
+Instructions
+
+chmod +x install.sh
+
+./install.sh
+
+https://yourip:8443

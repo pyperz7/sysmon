@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Monitor</title>
+    <style>
+        body {
+            background-color: black;  /* ✅ Black background */
+            color: limegreen;  /* ✅ Green text */
+            font-family: monospace;
+            text-align: center; /* ✅ Center all text */
+            padding: 20px;
+        }
+        h2 {
+            text-align: center; /* ✅ Explicitly center the title */
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        #sysmon-data {
+            white-space: pre-wrap; 
+            font-size: 14px;
+            padding: 10px;
+            background: #222;  /* Dark gray box */
+            color: #0f0;  /* Neon green text */
+            border-radius: 5px;
+            display: inline-block;  /* ✅ Prevents full-width stretching */
+            text-align: left;  /* ✅ Keeps system stats left-aligned */
+        }
+    </style>
+    <script>
+        async function fetchStats() {
+            try {
+                const response = await fetch('/stats'); // Fetch system stats from C++ server
+                const data = await response.text();
+                document.getElementById("sysmon-data").innerText = data;
+            } catch (error) {
+                console.error("Error fetching stats:", error);
+                document.getElementById("sysmon-data").innerText = "Error loading stats!";
+            }
+        }
+
+        setInterval(fetchStats, 2000); // Refresh every 2 seconds
+        window.onload = fetchStats;
+    </script>
+</head>
+<body>
+    <h2>System Monitor</h2>
+    <pre id="sysmon-data">Loading system stats...</pre>
+</body>
+</html>
